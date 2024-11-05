@@ -17,8 +17,7 @@ class Exercies {
 
     @Test
     fun exo1_1() {
-        val context = AnnotationConfigApplicationContext(AppConfig::class.java)
-        val userService = context.getBean(UserService::class.java)
+        val userService: UserService = TODO()
         userService.save(user())
         val user = userService.findOne(user().id)
 
@@ -27,9 +26,8 @@ class Exercies {
 
     @Test
     fun exo1_2() {
-        val context = AnnotationConfigApplicationContext(AppConfig::class.java)
-        val userService = context.getBean(UserService::class.java)
-        val superUserService = context.getBean(SuperUserService::class.java)
+        val userService: UserService = TODO()
+        val superUserService: SuperUserService = TODO()
         userService.save(user())
 
         assertThat(superUserService.findAll()).isEqualTo(listOf(user()))
@@ -37,36 +35,14 @@ class Exercies {
 
     @Test
     fun exo1_3() {
-        val context = AnnotationConfigApplicationContext(AppConfig::class.java)
-        val userService = context.getBean(UserService::class.java)
-        val superUserService = context.getBean(SuperUserService::class.java)
+        val userService: UserService = TODO()
+        val superUserService: SuperUserService = TODO()
         userService.save(user())
 
         assertThat(superUserService.findAll()).isEmpty()
     }
 
 
-}
-
-@SpringBootTest
-class Exo8 {
-
-    @MockkBean
-    private lateinit var database: ListDatabase
-
-    @Autowired
-    private lateinit var userService: UserService
-
-    @Test
-    fun exo_9() {
-        // GIVEN TODO
-        every { database.delete(any()) } returns Unit
-        every { database.delete(user()) } throws NoSuchElementException()
-
-        // THEN
-        assertThrows<NoSuchElementException> { userService.delete(user()) }
-        userService.delete(user(UUID.randomUUID()))
-    }
 }
 
 private fun user(uuid: UUID = UUID(0, 1)) = User(uuid, "John Doe", "email@noop.pony", 42)
