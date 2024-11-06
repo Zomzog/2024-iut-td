@@ -3,15 +3,8 @@ package iut.nantes
 import assertk.assertThat
 import assertk.assertions.isEmpty
 import assertk.assertions.isEqualTo
-import com.ninjasquad.springmockk.MockkBean
-import io.mockk.every
 import java.util.*
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.assertThrows
-import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.context.annotation.AnnotationConfigApplicationContext
-import kotlin.NoSuchElementException
 
 class Exercies {
 
