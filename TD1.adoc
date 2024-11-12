@@ -2,7 +2,20 @@
 
 Checkout de https://github.com/Zomzog/2024-iut-td.git
 
-Importer le projet dans son IDE
+Sur le réseau de l'IUT, ajouter à la racine un fichier gradle.properties avec le contenu suivant:
+
+[source,properties]
+----
+kotlin.code.style=official
+
+systemProp.http.proxyHost=srv-proxy-etu-2.iut-nantes.univ-nantes.prive
+systemProp.http.proxyPort=3128
+systemProp.https.proxyHost=srv-proxy-etu-2.iut-nantes.univ-nantes.prive
+systemProp.https.proxyPort=3128
+----
+
+Importer le projet dans son IDE en utilisant gradle.
+
 
 Les modifications sont à faire dans le module Exo1
 
@@ -33,7 +46,7 @@ Le test doit passer.
 
 == Exo 3
 
-Faire en sorte que partagent plus la même instance de `Database`
+Faire en sorte qu'ils ne partagent plus la même instance de `Database`
 
 Dans la classe de test Exercice#exo1_3 charger le context Spring à partir de AppConfig
 pour obtenir une instance des services.
@@ -42,7 +55,7 @@ Le test doit passer, le test exo1_2 ne passe plus.
 
 == Exo 4
 
-Supprimer le constructeur de SuperuserService et utiliser l'injection avec Autowired pour ce service.
+Supprimer le constructeur de SuperUserService et utiliser l'injection avec Autowired pour ce service.
 
 Le test exo1_3 doit toujours fonctionner
 
@@ -56,7 +69,7 @@ Le test exo1_3 doit toujours fonctionner
 
 Créer une classe de test unitaires ListDatabaseTest qui couvre à 100% ListDatabase
 
-== Exo 6
+== Exo 6.5
 
 Créer une nouvelle version de Database nommée `HashDatabase` en utilisant une `Map<UUID, User>` comme persistance.
 
