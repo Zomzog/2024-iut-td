@@ -35,7 +35,7 @@ pour obtenir une instance de userService
 == Exo 2
 
 Avec la même approche,
-ajouter la création d'un bean SuperuserService.
+ajouter la création d'un bean SuperUserService.
 
 Il doit partager la même instance de `Database`.
 
