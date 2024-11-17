@@ -1,0 +1,3 @@
+Hello !
+
+${spring.application.name}
