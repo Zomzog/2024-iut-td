@@ -20,7 +20,7 @@ class MovieController(val movieService: MovieService,
     }
 
     @PostMapping("/ponies")
-    @Transactional
+   // @Transactional
     fun createPonies(@RequestBody pony: Pony) {
        ponyRepository.save(pony)
     }

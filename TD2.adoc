@@ -1,0 +1,53 @@
+== TD1
+
+== Exo 20
+
+Ajouter une validation pour que l'appel au endpoint GET /api/v1/pets/{petId}
+réponde une 400 si petId est inférieur ou égale à 0
+
+TODO tests
+
+== Exo 21
+
+Ajouter une validation pour que l'appel au endpoint POST /api/v1/pets
+réponde une 400 si le nom du pet est vide ou l'age est inférieur à 0
+
+TODO tests
+
+== Exo 22
+
+Créer une meta annotation pour que les appels GET et PUT partagent la même règle de validation du petId
+
+== Exo 23
+
+Les requests params peuvent être groupé dans un objet sans lui fournir d'annotation.
+
+Créer une classe ageRange pour remplacer les paramètres de GET /api/v1/pets
+
+== Exo 24
+
+Créer une annotation @ValidAgeRange pour valider que l'age min est inférieur à l'age max s'ils sont fournis
+
+== Exo 25
+
+A l'aide d'un controller advice, renvoyer une erreur 418 en cas d'exception ImATeapotException
+
+== Exo 26
+
+Dans ce controller advice, etendre la gestion des erreurs de spring,
+mais remplacer le retour en cas d'erreur de validation par une réponse sous la forme:
+
+[source,json]
+----
+{
+  "erreur": 400,
+  "message": "message de l'exception"
+}
+----
+
+== Exo 27
+
+Ajouter le fichier src/main/resources/application.yml
+```
+
+```
