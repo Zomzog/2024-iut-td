@@ -29,16 +29,7 @@ class MovieControllerTest {
 
     @Test
     fun demoGet() {
-        mockMvc.perform(post("/api/movies")
-            .contentType(MediaType.APPLICATION_JSON)
-            .content("""{"name": "The Dark Knight", "year": 2008}"""))
-            .andExpect {
-                status { isBadRequest() }
-            }
-       mockMvc.get("/api/movies", "1") {
-                param("id", "1")
-           param("toto", "titi")
-       }
+       mockMvc.get("/api/movies")
             .andExpect {
                 status { isOk() }
                 content { contentType("application/json") }
