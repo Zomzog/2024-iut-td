@@ -1,53 +1,132 @@
-== TD1
+== TD2
 
 == Exo 20
 
 Ajouter une validation pour que l'appel au endpoint GET /api/v1/pets/{petId}
-réponde une 400 si petId est inférieur ou égale à 0
+retourne un code 400 si petId est inférieur ou égal à 0
 
-TODO tests
+La classe de test Exo20 de PetControllerTest doit passer sans y apporter de modifications
 
 == Exo 21
 
 Ajouter une validation pour que l'appel au endpoint POST /api/v1/pets
-réponde une 400 si le nom du pet est vide ou l'age est inférieur à 0
+retourne un code 400 si le nom est vide ou si l'âge est inférieur à 0
 
-TODO tests
+La classe de test Exo21 de PetControllerTest doit passer sans y apporter de modifications
 
 == Exo 22
 
-Créer une meta annotation pour que les appels GET et PUT partagent la même règle de validation du petId
+Créer une meta annotation pour que les appels GET et PUT partagent la même règle de validation du petId en dans l'url
+
+Les classes de test Exo20 et Exo22 de PetControllerTest doivent passer sans y apporter de modifications
 
 == Exo 23
 
-Les requests params peuvent être groupé dans un objet sans lui fournir d'annotation.
+Les "requests params" peuvent être groupés dans un objet.
+Il ne faut pas lui ajouter d'annotation (même pas @RequestParam) sans lui fournir d'annotation.
 
-Créer une classe ageRange pour remplacer les paramètres de GET /api/v1/pets
+Créer une classe AgeRange pour remplacer les paramètres de GET /api/v1/pets
+
+La classe de test Exo23 de PetControllerTest doit passer sans y apporter de modifications
 
 == Exo 24
 
-Créer une annotation @ValidAgeRange pour valider que l'age min est inférieur à l'age max s'ils sont fournis
+Créer une annotation @ValidAgeRange pour valider que l'âge minimum est inférieur à l'âge maximum s'ils sont fournis
+
+Les classes de test Exo23 et Exo24 de PetControllerTest doivent passer sans y apporter de modifications
 
 == Exo 25
 
-A l'aide d'un controller advice, renvoyer une erreur 418 en cas d'exception ImATeapotException
+A l'aide d'un "controller advice", renvoyer une erreur 418 en cas d'exception ImATeapotException
+
+La classe de test Exo25 de PetControllerTest doit passer sans y apporter de modifications
 
 == Exo 26
 
-Dans ce controller advice, etendre la gestion des erreurs de spring,
-mais remplacer le retour en cas d'erreur de validation par une réponse sous la forme:
+Dans le controller advice ErrorHandler, qui étend la gestion des erreurs de spring,
+remplacer le retour en cas d'erreur de validation par une réponse sous la forme:
 
 [source,json]
 ----
 {
-  "erreur": 400,
+  "status": 400,
   "message": "message de l'exception"
 }
 ----
 
+La classe de test Exo26 de PetControllerTest doit passer sans y apporter de modifications
+
 == Exo 27
 
 Ajouter le fichier src/main/resources/application.yml
-```
 
-```
+[source,yml]
+----
+custom:
+    app-name: "mon application"
+    app-version: "1.0.1"
+    git:
+        branch: "main"
+        commit: "123456"
+----
+
+Ajouter un fichier banner.txt dans src/main/resources avec le contenu
+
+[source]
+----
+${custom.app-name} ${custom.app-version} ${custom.git.branch} ${custom.git.commit}
+----
+
+== Exo 28
+
+En utilisant des @Value, créer un endpoint GET /api/v1/info qui renvoie la réponse suivante en json
+
+[source,json]
+----
+{
+    "app-name": "mon application",
+    "app-version": "1.0",
+    "git": {
+        "branch": "master",
+        "commit": "123456"
+    }
+}
+----
+
+La classe de test Exo28 de InfoTest doit passer sans y apporter de modifications
+
+== Exo 29
+
+Remplacer l'utilisation des @Value par un l'approche avec un @ConfigurationProperties
+
+La classe de test Exo28 de InfoTest doit toujours passer sans y apporter de modifications
+
+== Exo 30
+
+Ajouter le fichier src/main/resources/application-dev.yml
+
+[source,yml]
+----
+custom:
+    app-version: "1.0.2-SNAPSHOT"
+    git:
+        branch: "feature/TICKET"
+        commit: "654321"
+----
+
+La classe de test Exo30 de InfoTest doit passer sans y apporter de modifications
+
+== Exo 31
+
+Ajouter un paramètre variable "maxRange" dans l'annotation @ValidAgeRange.
+Modifier la validation pour garantir que l'écart entre l'âge minimum et l'âge maximum est inférieur à ce max.
+
+== Exo 32
+
+Spring s'occupe de la création du validator,
+on peut y injecter le max-range depuis le fichier de configuration (custom.api.pets.max-range=100)
+
+Utiliser un @Value pour le faire.
+
+/!\ Dans ce contexte on ne peut pas utiliser lateinit.
+Il faut fournir une valeur par défaut directement sur le champ.

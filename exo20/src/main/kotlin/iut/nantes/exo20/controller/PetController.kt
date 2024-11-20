@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
+import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
@@ -42,13 +43,10 @@ class PetController(val database : MutableMap<Int, PetDto> = mutableMapOf()){
     }
 
     @GetMapping("/api/v1/pets")
-    fun getPets(r: Range = Range(null, null)): ResponseEntity<List<PetDto>> {
-//    fun getPets(@RequestParam minAge: Int?, @RequestParam maxAge: Int?): ResponseEntity<List<PetDto>> {
+    fun getPets(@RequestParam minAge: Int?, @RequestParam maxAge: Int?): ResponseEntity<List<PetDto>> {
        var result: List<PetDto> = database.values.toList()
-        if (r.minAge != null) result = result.filter { it.age >= r.minAge }
-        if (r.maxAge != null) result = result.filter { it.age <= r.maxAge }
+        if (minAge != null) result = result.filter { it.age >= minAge }
+        if (maxAge != null) result = result.filter { it.age <= maxAge }
         return ResponseEntity.ok(result)
     }
-
-    class Range(val minAge: Int?, val maxAge: Int?)
 }
