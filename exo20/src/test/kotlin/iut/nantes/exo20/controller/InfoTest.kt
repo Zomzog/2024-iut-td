@@ -3,7 +3,9 @@ package iut.nantes.exo20.controller
 import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
+import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.context.annotation.Profile
 import org.springframework.test.context.ActiveProfiles
 import org.springframework.test.web.servlet.MockMvc
@@ -12,7 +14,8 @@ import org.springframework.test.web.servlet.get
 class InfoTest{
 
     @Nested
-    @WebMvcTest
+    @SpringBootTest
+    @AutoConfigureMockMvc
     inner class Exo28 {
 
         @Autowired
@@ -34,7 +37,8 @@ class InfoTest{
 
     @Nested
     @ActiveProfiles("dev")
-    @WebMvcTest
+    @SpringBootTest
+    @AutoConfigureMockMvc
     inner class Exo30 {
 
         @Autowired
