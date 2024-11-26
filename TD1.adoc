@@ -226,7 +226,7 @@ curl --location 'localhost:8080/api/movies' \
 == Exo 13: Read - List
 
 Le premier endpoint de lecture est un endpoint de liste.
-Un appel à GET `/api/movies` doit répondre 200 avec la liste des utilisateurs qui sont dans la Map.
+Un appel à GET `/api/movies` doit répondre 200 avec la liste des films qui sont dans la Map.
 
 
 Exemple d'appel:
