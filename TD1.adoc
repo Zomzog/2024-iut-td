@@ -421,7 +421,7 @@ Cette API peut-être injecté en ajoutant `@AutoConfigureMockMvc` à un test.
 
 Un example est fourni dans MovieControllerTest,
 
-La documentation se trouve https://docs.spring.io/spring-framework/reference/testing/spring-mvc-test-framework.html[ici]
+La documentation se trouve https://docs.spring.io/spring-framework/reference/testing/mockmvc.html[ici]
 
 Utiliser ce framework, faire de test de la class MovieController
 
