@@ -1,0 +1,149 @@
+== TD2
+
+== Exo 33
+
+Ajouter dans le fichier src/main/resources/application.yml la configuration suivante
+
+[source,yaml]
+----
+spring:
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driverClassName: org.h2.Driver
+    username: sa
+    password: password
+  h2:
+    console:
+      enabled: true
+----
+
+La base de données H2 est une base de données en mémoire.
+Pour y accéder, il faut se rendre sur l'url http://localhost:8080/h2-console
+
+A chaque démarrage de l'application, la base de données est réinitialisée.
+
+Pour le constater vous pouvez lancer la requête suivante avant de relancer le service:
+
+[source,sql]
+----
+CREATE TABLE TEST(ID INT PRIMARY KEY, NAME VARCHAR(255));
+----
+
+== Exo 34
+
+Modifier le fichier src/main/resources/application.yml avec pour datasource.url jdbc:h2:file:./data/testdb
+
+Les données sont stockées dans un fichier data/testdb.mv.db à la racine du projet.
+
+Entre deux démarrages de l'application, les données sont conservées.
+
+== Exo 35
+
+Créer une Entity (au sens JPA) HumanEntity qui correspond aux attributs de HumanDto
+
+Créer un repository HumanRepository qui étend JpaRepository
+
+A l'aide de se repository, dans DatabaseProxy, implémentez les fonctions suivantes:
+
+- saveHuman
+
+- findHumanById
+
+- findAllHumans
+
+Le test `exo 35` doit passer.
+
+== Exo 36
+
+Modifier HumanDto pour lui ajouter un attribut contact
+
+[source,kotlin]
+----
+data class HumanDto(val humanId: Int?, val name: String, val contact: ContactDto)
+----
+
+Créer une Entity (au sens JPA) ContactEntity qui correspond aux attributs de ContactDto.
+
+A l'aide d'un @OneToOne, lier HumanEntity et ContactEntity de manière uni-directionnel
+(ie on peut faire human.contact.email, mais pas contact.human.name)
+
+Le test `exo 36` doit passer.
+
+== Exo 37
+
+Modifier le OneToMany pour qu'il soit bi-directionnel
+
+Le test `exo 37` doit passer.
+
+== Exo 38
+
+Modifier HumanDto pour lui ajouter un attribut pets
+
+[source,kotlin]
+----
+data class HumanDto(val humanId: Int?, val name: String, val contact: ContactDto, val pets: List<PetDto>)
+----
+
+Créer une Entity (au sens JPA) ContactEntity qui correspond aux attributs de PetDto.
+
+A l'aide d'un @OneToMany, lier HumanEntity et ContactEntity de manière uni-directionnel
+
+Le test `exo 38` doit passer.
+
+== Exo 39
+
+Modifier le OneToMany pour qu'il soit bi-directionnel
+
+Le test `exo 38` doit passer.
+
+== Exo 40
+
+Ajouter un nouveau endpoint DELETE "/api/v1/humans/{humanId}/pets/{petId}" et les services requis.
+
+Ce endpoint permet de supprimer un pet.
+
+Le test `exo 40` doit passer.
+
+== Exo Bonus
+
+Créer une configuration application-postgres.yml où la base h2 est remplacé par par une base postgresql
+
+Pour lancer une base postgres sur le port 5432, vous pouvez utiliser la commande suivante:
+`podman run --name postgres -e POSTGRES_USER=username -e POSTGRES_PASSWORD=password -p 5432:5432 -v /tmp/data -d postgres`
+
+== Exo 41
+
+Ajouter spring securité au projet.
+
+Configurer le SecurityFilterChain pour que toutes les requêtes GET passent sans authentification, mais que les autres requêtes nécessitent une authentification.
+
+Le test `exo 41` doit passer.
+
+== Exo 42
+
+Appeler le endpoint DELETE "/api/v1/humans/{humanId}/pets/{petId}" nécessite d'avoir le rôle admin.
+
+Modifier la configuration pour que le test `exo 40` ne passe plus à cause d'une erreur 403, puis corriger le test pour ne plus avoir une 403.
+
+== Exo 43
+
+Ajouter un InMemoryUserDetailsManager avec un utilisateur user classique et un utilisateur admin.
+
+Une fois l'application lancé, appeler les endpoints (curl, bruno... ) avec le basic auth qui correspond à ces utilisateurs.
+
+== Exo 44
+
+Modifier HumanDto pour lui ajouter un attribut creatorLogin
+
+[source,kotlin]
+----
+data class HumanDto(val humanId: Int?, val name: String, val contact: ContactDto, val pets: List<PetDto>, val creatorLogin: String?)
+----
+
+Ce Login doit être celui de l'utilisateur authentifié lors de la création de la donnée.
+
+Le test `exo 44` doit passer une fois la linge MockUser activé.
+
+== Exo Bonus
+
+Remplacer le InMemoryUserDetailsManager par un JdbcUserDetailsManager.
