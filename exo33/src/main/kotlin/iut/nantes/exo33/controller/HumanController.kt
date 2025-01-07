@@ -39,12 +39,6 @@ class HumanController(val db: DatabaseProxy){
         }
     }
 
-    @DeleteMapping("/api/v1/humans/{humanId}/pets/{petId}")
-    fun removePet(@PathVariable humanId: Int, @PathVariable petId: Int): ResponseEntity<Unit> {
-        db.deletePet(petId)
-        return ResponseEntity.noContent().build()
-    }
-
     @GetMapping("/api/v1/humans")
     fun getHumans(@RequestParam minAge: Int?, @RequestParam maxAge: Int?): ResponseEntity<List<HumanDto>> {
         val result = db.findAllHuman()

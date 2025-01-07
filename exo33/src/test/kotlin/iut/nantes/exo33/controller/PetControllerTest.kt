@@ -92,35 +92,37 @@ class PetControllerTest {
 
     @Test
     fun `exo 40`() {
-        val h = databaseProxy.saveHuman(HumanDto(null, "Joe", ContactDto("Joe@Doe.pom"), listOf(PetDto(null, "Java", 3, PetKind.DOG))))
-        mockMvc.delete("/api/v1/humans/${h.humanId}/pets/${h.pets[0].id}") {
-        }.andExpect {
-            status { isNoContent() }
-        }
-        mockMvc.get("/api/v1/humans") {
-        }.andExpect {
-            status { isOk() }
-            content { contentType("application/json") }
-            jsonPath("$[0].name") { value("Joe") }
-            jsonPath("$[0].contact.email") { value("Joe@Doe.pom") }
-            jsonPath("$[0].pets") { isEmpty() }
-        }
+        // Uncomment the following line to before runing the test
+//        val h = databaseProxy.saveHuman(HumanDto(null, "Joe", ContactDto("Joe@Doe.pom"), listOf(PetDto(null, "Java", 3, PetKind.DOG))))
+//        mockMvc.delete("/api/v1/humans/${h.humanId}/pets/${h.pets[0].id}") {
+//        }.andExpect {
+//            status { isNoContent() }
+//        }
+//        mockMvc.get("/api/v1/humans") {
+//        }.andExpect {
+//            status { isOk() }
+//            content { contentType("application/json") }
+//            jsonPath("$[0].name") { value("Joe") }
+//            jsonPath("$[0].contact.email") { value("Joe@Doe.pom") }
+//            jsonPath("$[0].pets") { isEmpty() }
+//        }
     }
 
     @Test
     fun `exo 41`() {
-        val h = databaseProxy.saveHuman(HumanDto(null, "Joe", ContactDto("Joe@Doe.pom"), listOf(PetDto(null, "Java", 3, PetKind.DOG))))
-        mockMvc.delete("/api/v1/humans/${h.humanId}/pets/${h.pets[0].id}") {
-        }.andExpect {
-            status { isUnauthorized() }
-        }
-        mockMvc.get("/api/v1/humans") {
-        }.andExpect {
-            status { isOk() }
-            content { contentType("application/json") }
-            jsonPath("$[0].name") { value("Joe") }
-            jsonPath("$[0].contact.email") { value("Joe@Doe.pom") }
-        }
+        // Uncomment the following line to before runing the test
+//        val h = databaseProxy.saveHuman(HumanDto(null, "Joe", ContactDto("Joe@Doe.pom"), listOf(PetDto(null, "Java", 3, PetKind.DOG))))
+//        mockMvc.delete("/api/v1/humans/${h.humanId}/pets/${h.pets[0].id}") {
+//        }.andExpect {
+//            status { isUnauthorized() }
+//        }
+//        mockMvc.get("/api/v1/humans") {
+//        }.andExpect {
+//            status { isOk() }
+//            content { contentType("application/json") }
+//            jsonPath("$[0].name") { value("Joe") }
+//            jsonPath("$[0].contact.email") { value("Joe@Doe.pom") }
+//        }
     }
 
 
