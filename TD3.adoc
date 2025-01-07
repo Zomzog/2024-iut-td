@@ -71,7 +71,7 @@ Le test `exo 36` doit passer.
 
 == Exo 37
 
-Modifier le OneToMany pour qu'il soit bi-directionnel
+Modifier le OneToOne pour qu'il soit bi-directionnel
 
 Le test `exo 37` doit passer.
 
