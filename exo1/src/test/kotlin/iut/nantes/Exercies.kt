@@ -42,4 +42,4 @@ class Exercies {
 
 }
 
-private fun user(uuid: UUID = UUID(0, 1)) = User(uuid, "John Doe", "email@noop.pony", 42)
+fun user(uuid: UUID = UUID(0, 1), name: String = "John Doe") = User(uuid, name, "email@noop.pony", 42)
