@@ -1,7 +1,12 @@
 package iut.nantes
 
 import java.util.*
+import org.springframework.beans.factory.config.ConfigurableBeanFactory
+import org.springframework.context.annotation.Scope
+import org.springframework.stereotype.Repository
 
+@Repository
+@Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
 class ListDatabase: Database {
 
     private val users = mutableListOf<User>()
