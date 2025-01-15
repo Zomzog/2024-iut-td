@@ -5,12 +5,14 @@ import assertk.assertions.isEmpty
 import assertk.assertions.isEqualTo
 import java.util.*
 import org.junit.jupiter.api.Test
+import org.springframework.context.annotation.AnnotationConfigApplicationContext
 
 class Exercies {
 
     @Test
     fun exo1_1() {
-        val userService: UserService = TODO()
+        val context = AnnotationConfigApplicationContext(AppConfig::class.java)
+        val userService: UserService = context.getBean(UserService::class.java)
         userService.save(user())
         val user = userService.findOne(user().id)
 
