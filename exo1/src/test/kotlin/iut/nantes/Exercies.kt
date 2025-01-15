@@ -31,8 +31,9 @@ class Exercies {
 
     @Test
     fun exo1_3() {
-        val userService: UserService = TODO()
-        val superUserService: SuperUserService = TODO()
+        val context = AnnotationConfigApplicationContext(AppConfig::class.java)
+        val userService: UserService = context.getBean(UserService::class.java)
+        val superUserService: SuperUserService = context.getBean(SuperUserService::class.java)
         userService.save(user())
 
         assertThat(superUserService.findAll()).isEmpty()
