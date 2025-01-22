@@ -1,8 +1,10 @@
 package iut.nantes.exo20.controller
 
 import iut.nantes.exo20.errors.ImATeapotException
+import jakarta.validation.constraints.Min
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
+import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
@@ -12,10 +14,11 @@ import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
+@Validated
 class PetController(val database : MutableMap<Int, PetDto> = mutableMapOf()){
 
     @GetMapping("/api/v1/pets/{petId}")
-    fun getPet(@PathVariable petId: Int) = database[petId]?.let {
+    fun getPet(@Min(1) @PathVariable petId: Int) = database[petId]?.let {
         ResponseEntity.ok(it)
     } ?: ResponseEntity.notFound().build()
 
