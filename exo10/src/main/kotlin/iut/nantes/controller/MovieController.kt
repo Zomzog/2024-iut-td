@@ -31,4 +31,40 @@ class MovieController(val database: Database) {
                 .body("Movie already exists")
         }
 
+    @GetMapping("/api/movies")
+    fun list(@RequestParam(name = "rating") queryRating: List<Int>?,
+             @RequestHeader(name = HttpHeaders.ACCEPT_LANGUAGE) lang: String?): ResponseEntity<List<Movie>> {
+        var all = database.getMovies().toList()
+        if (queryRating != null) {
+            all = all.filter { it.rating in queryRating }
+        }
+        if(lang != null) {
+            all = all.filter { it.languages.contains( lang) }
+        }
+        return ResponseEntity.ok(all)
+    }
+
+   @GetMapping("/api/movies/{name}")
+    fun getOne(@PathVariable name: String) = database.getOne(name)?.let {
+        ResponseEntity.ok(it)
+    } ?: ResponseEntity.notFound().build()
+
+    @PutMapping("/api/movies/{name}")
+    fun update(@PathVariable name: String, @RequestBody movie: Movie) =
+        if (name != movie.name) {
+            ResponseEntity.badRequest().body("Name in path and body must be the same")
+        } else if (database.getOne(name) != null) {
+            ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body("Movie already exists")
+        } else {
+            database.update(movie).let {
+                ResponseEntity.ok(it)
+            }
+        }
+
+    @DeleteMapping("/api/movies/{name}")
+    fun delete(@PathVariable name: String): ResponseEntity<Unit> = database.getOne(name)?.let {
+        database.delete(it.name)
+        ResponseEntity.noContent().build()
+    } ?: ResponseEntity.notFound().build()
 }
