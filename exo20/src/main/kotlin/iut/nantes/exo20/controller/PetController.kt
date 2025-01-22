@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController
 class PetController(val database : MutableMap<Int, PetDto> = mutableMapOf()){
 
     @GetMapping("/api/v1/pets/{petId}")
-    fun getPet(@Min(1) @PathVariable petId: Int) = database[petId]?.let {
+    fun getPet(@PetId @PathVariable petId: Int) = database[petId]?.let {
         ResponseEntity.ok(it)
     } ?: ResponseEntity.notFound().build()
 
@@ -32,7 +32,7 @@ class PetController(val database : MutableMap<Int, PetDto> = mutableMapOf()){
     }
 
     @PutMapping("/api/v1/pets/{petId}")
-    fun updatePet(@RequestBody pet: PetDto, @PathVariable petId: Int): ResponseEntity<PetDto> {
+    fun updatePet(@RequestBody pet: PetDto, @PathVariable @PetId petId: Int): ResponseEntity<PetDto> {
         if (pet.id != petId) {
             throw IllegalArgumentException("Pet ID in path and body do not match")
         }
