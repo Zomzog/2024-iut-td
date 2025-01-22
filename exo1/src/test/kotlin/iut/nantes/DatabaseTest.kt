@@ -2,16 +2,16 @@ package iut.nantes
 
 import assertk.assertThat
 import assertk.assertions.containsExactly
+import assertk.assertions.isEqualTo
 import java.util.*
-import org.junit.jupiter.api.Assertions.*
-import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
-class ListDatabaseTest {
-    var database = ListDatabase()
-    @BeforeEach
-    fun setup() {
-        database = ListDatabase()
+abstract class DatabaseTest(val database: Database) {
+    @Test
+    fun `find all users`() {
+        database.save(user())
+        val users = database.findAll(null)
+        assertThat(users).containsExactly(user())
     }
 
     @Test
@@ -21,7 +21,7 @@ class ListDatabaseTest {
         // WHEN
         database.save(user)
         // THEN
-        assertEquals(user, database.findOne(user.id))
+        assertThat(database.findOne(user.id)).isEqualTo(user)
     }
 
     @Test
@@ -37,6 +37,8 @@ class ListDatabaseTest {
         val result = database.findAll("John")
         // THEN
         assertThat(result.map { it.id }).containsExactly(user1.id, user3.id)
-
     }
 }
+
+class ListDatabaseTest: DatabaseTest(ListDatabase())
+class HashDatabaseTest: DatabaseTest(HashDatabase())
