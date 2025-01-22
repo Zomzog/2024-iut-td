@@ -73,7 +73,7 @@ Le test `exo 36` doit passer.
 
 Modifier le OneToOne pour qu'il soit bi-directionnel
 
-Le test `exo 37` doit passer.
+Le test `exo 36` doit passer.
 
 == Exo 38
 

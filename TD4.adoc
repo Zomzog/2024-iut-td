@@ -1,0 +1,34 @@
+== TD4
+
+== Exo 45
+
+WebClientService#hello pour appeler en GET l'url http://localhost:8888/api/v1/hello
+
+Le web-service renvoi un objet de type HelloDto qui doit être retourné par la fonction.
+
+Le test `exo 45` doit passer.
+
+== Exo 46
+
+Modifier la même méthode pour rajouter le query param `name=World` à l'url.
+
+Le test `exo 46` doit passer.
+
+== Exo 47
+
+WebClientService#noHello pour appeler en POST l'url http://localhost:8888/api/v1/noHello
+avec en Body HelloDto("No hello")
+
+Le test `exo 47` doit passer.
+
+== Exo 48
+
+WebClientService#error pour appeler en GET l'url http://localhost:8888/api/v1/error
+
+En cas de réponse 5xx, la méthode doit renvoyer une exception de type MyInternalError.
+
+Le test `exo 48` doit passer.
+
+== Exo 50 -> 53
+
+Faire les exos 45 à 48 mais dans la classe RestClientService
