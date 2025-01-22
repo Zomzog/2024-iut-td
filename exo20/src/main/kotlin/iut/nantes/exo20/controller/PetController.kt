@@ -24,7 +24,7 @@ class PetController(val database : MutableMap<Int, PetDto> = mutableMapOf()){
 
 
     @PostMapping("/api/v1/pets")
-    fun createPet(@RequestBody pet: PetDto): ResponseEntity<PetDto> {
+    fun createPet(@Validated @RequestBody pet: PetDto): ResponseEntity<PetDto> {
         val next = (database.keys.maxOrNull() ?: 0) + 1
         val withId = pet.copy(id = next)
         database[next] = withId
