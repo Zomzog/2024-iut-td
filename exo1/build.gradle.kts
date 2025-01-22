@@ -21,9 +21,12 @@ repositories {
 dependencies {
     testImplementation("com.willowtreeapps.assertk:assertk-jvm:0.28.1")
     implementation("org.springframework:spring-context")
-	implementation("org.jetbrains.kotlin:kotlin-reflect")
-	testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
-	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+    implementation("org.jetbrains.kotlin:kotlin-reflect")
+    testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+
+    implementation("org.springframework.boot:spring-boot-starter")
+    testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
 kotlin {

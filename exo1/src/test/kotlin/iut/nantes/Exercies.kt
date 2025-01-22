@@ -6,6 +6,9 @@ import assertk.assertions.isEqualTo
 import assertk.assertions.isInstanceOf
 import java.util.*
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.context.annotation.AnnotationConfigApplicationContext
 
 class Exercies {
@@ -52,3 +55,12 @@ class Exercies {
 }
 
 fun user(uuid: UUID = UUID(0, 1), name: String = "John Doe") = User(uuid, name, "email@noop.pony", 42)
+
+@SpringBootTest
+class Exo8 {
+
+    @Test
+    fun exo_8() {
+        // Test le chargement du contexte
+    }
+}
